@@ -7,13 +7,13 @@ export default class Aventurier {
         this.firstName = firstName;
         this.position = position;
         this.axe = axe;
-        this.nbDeplacement = -1;
+        this.iteratorDeplacement = -1;
         this.nbTresor = 0;
         this.mouvement = mouvements;
-    }
+    };
     
     deplacementDisponible() {
-        if(this.nbDeplacement + 1 < this.mouvement.length) return true;
+        if(this.iteratorDeplacement + 1 < this.mouvement.length) return true;
         return false;
     };
     
@@ -21,10 +21,10 @@ export default class Aventurier {
         if(this.position.x == position.x
           && this.position.y == position.y) return true;
         return false;
-    }
+    };
     
     nextPosition() {
-        let nextMouvement = this.mouvement[this.nbDeplacement + 1];
+       let nextMouvement = this.mouvement[this.iteratorDeplacement + 1];
        var futurPosition = this.position;
         
         if(nextMouvement == Mouvement.A) {
@@ -32,19 +32,19 @@ export default class Aventurier {
         } else {
         }
         return futurPosition;
-    }
+    };
     
     ignoreNextDeplacement() {
-        this.nbDeplacement++;
-    }
+        this.iteratorDeplacement++;
+    };
     
     ramasserTresors(nb) {
         this.nbTresor += nb;
-    }
+    };
     
     effectuerDeplacement() {
         // Recupérer le prochain mouvement à éffectuer
-        let nextMouvement = this.mouvement[this.nbDeplacement + 1];
+        let nextMouvement = this.mouvement[this.iteratorDeplacement + 1];
         var futurPosition = this.position;
         var isMvtAvancer = false;
         
@@ -55,13 +55,13 @@ export default class Aventurier {
         }  else {
             this.axe = this.axe.deplacer(nextMouvement, Mouvement);
         }
-        this.nbDeplacement++;
+        this.iteratorDeplacement++;
         return isMvtAvancer;
-    }
+    };
     
     /**effectuerDeplacementBis() {
         // Recupérer le prochain mouvement à éffectuer
-        let nextMouvement = this.mouvement[this.nbDeplacement + 1];
+        let nextMouvement = this.mouvement[this.iteratorDeplacement + 1];
         var futurPosition = this.position;
         
         if(nextMouvement == Mouvement.A) {
@@ -80,13 +80,13 @@ export default class Aventurier {
         }
         
         if(ignorerDeplacement || deplacementIsOk) {
-            this.nbDeplacement++;
+            this.iteratorDeplacement++;
         }
     }*/
     
     toString() {
         var resultStr = "A - " + this.firstName + " - " + this.position.x + " - " + this.position.y + " - " + this.axe.axe + " - " + this.nbTresor
         return resultStr;
-    }
+    };
 
 }

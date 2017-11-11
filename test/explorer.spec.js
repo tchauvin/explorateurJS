@@ -131,6 +131,25 @@ describe('Montagne', () => {
 });
 
 describe('Mouvement', () => {
+    it('Test getMouvement Str', () => {
+        
+        it('returns Mouvement.A', () => {
+            var newMvt = Mouvement.getMouvement("A");
+            newMvt.should.equal(Mouvement.A);
+        });
+        
+        it('returns Mouvement.D', () => {
+            var newMvt = Mouvement.getMouvement("D");
+            newMvt.should.equal(Mouvement.D);
+        });
+        
+        it('returns Mouvement.G', () => {
+            var newMvt = Mouvement.getMouvement("G");
+            newMvt.should.equal(Mouvement.G);
+        });
+
+    });
+    
     it('Test Avancer', () => {
 
         let position;
@@ -167,6 +186,20 @@ describe('Mouvement', () => {
 });
 
 describe('Axe', () => {
+    it('Test getAxe Str', () => {
+        
+        it('returns Axe.N', () => {
+            var newAxe = Axe.getAxe("N");
+            newAxe.should.equal(Axe.N);
+        });
+        
+        it('returns Axe.O', () => {
+            var newAxe = Axe.getAxe("O");
+            newAxe.should.equal(Axe.O);
+        });
+
+    });
+    
     it('Test Axe.N', () => {
         
         it('returns Axe.N', () => {
@@ -216,18 +249,61 @@ describe('Axe', () => {
     
 });
 
-/*describe('Aventurier', () => {
-    describe('#constructor()', () => {
-        it('requires arguments', () => {
-            () => {
-                new Aventurier();
-            }.should.throw(Error);
-
-            () => {
-                new Aventurier('foo', 'bar', 'test', 'toto');
-            }.should.throw(Error);
-
-        });
+describe('Aventurier', () => {
+    
+    let aventurier;
+    beforeEach(() => {
+        aventurier = new Aventurier("Lara", new Case(1,3), Axe.N, [Mouvement.A, Mouvement.D]);
+    });
+    
+    it('constructor', () => {  
+        aventurier.should.not.be.null;
+    });
+    
+    
+    it('next Mvt', () => {  
+        var nextPosition = aventurier.nextPosition();
+        var testNextPosition = new Case(1, 2);
+        nextPosition.x.should.equals(testNextPosition.x);
+        nextPosition.y.should.equals(testNextPosition.y);
+    });
+    
+    it('est sur position', () => {  
+        var testPosition = new Case(1, 3);
+        aventurier.estSurCettePosition(testPosition).should.be.true;
+        testPosition = new Case(2, 3);
+        aventurier.estSurCettePosition(testPosition).should.be.false;
+    });
+    
+    it('ramasser tresor', () => {
+        aventurier.nbTresor.should.equals(0);
+        aventurier.ramasserTresors(1);
+        aventurier.nbTresor.should.equals(1);
+    });
+    
+    it('ignorer Mvt', () => {  
+        var nextPosition = aventurier.nextPosition();
+        var testNextPosition = new Case(1, 2);
+        nextPosition.x.should.equals(testNextPosition.x);
+        nextPosition.y.should.equals(testNextPosition.y);
+        
+        aventurier.ignoreNextDeplacement();
+        
+        nextPosition = aventurier.nextPosition();
+        testNextPosition = new Case(1, 3);
+        nextPosition.x.should.equals(testNextPosition.x);
+        nextPosition.y.should.equals(testNextPosition.y);
+    });
+    
+    it('effectuer deplacement', () => {
+        var thisPosition = new Case(1, 3);
+        aventurier.estSurCettePosition(thisPosition).should.be.true;
+        
+        var resultDeplacemnt = aventurier.effectuerDeplacement();
+        resultDeplacemnt.should.be.true;
+        
+        thisPosition = new Case(1, 2);
+        aventurier.estSurCettePosition(thisPosition).should.be.true;
     });
 
-});*/
+});
