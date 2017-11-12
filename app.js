@@ -9,7 +9,7 @@ const filenameOutput = "output.txt";
 var plateau = initData(filenameInput);
 
 // deplacement des aventuriers
-plateau.deplacerAventuriers();
-
-// Print result
-printResult(plateau, filenameOutput);
+plateau.deplacerAventuriers().then(data => {
+    // Print result
+    printResult(plateau, filenameOutput);
+});

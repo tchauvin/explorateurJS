@@ -40,7 +40,7 @@ export default class Plateau {
         return false;
     }
 
-    deplacerAventuriers() {
+    async deplacerAventuriers() {
         let nbAventuriers = this.aventuriers.length;
         var nbAventuriersFinish = 0;
         var iterator = 0;
