@@ -29,8 +29,8 @@ export default class Aventurier {
         
         if(nextMouvement == Mouvement.A) {
             futurPosition = Mouvement.A.avancer(this.axe, this.position, Axe);
-        } else {
         }
+        
         return futurPosition;
     };
     
