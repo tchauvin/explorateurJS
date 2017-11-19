@@ -7,24 +7,21 @@ export default class Aventurier {
         this.firstName = firstName;
         this.position = position;
         this.axe = axe;
-        this.iteratorDeplacement = -1;
         this.nbTresor = 0;
-        this.mouvement = mouvements;
+        this.mouvements = mouvements;
     };
     
     deplacementDisponible() {
-        if(this.iteratorDeplacement + 1 < this.mouvement.length) return true;
-        return false;
+        return (this.mouvements.length >= 1);
     };
     
     estSurCettePosition(position) {
-        if(this.position.x == position.x
-          && this.position.y == position.y) return true;
-        return false;
+        return (this.position.x == position.x
+          && this.position.y == position.y);
     };
     
     nextPosition() {
-       let nextMouvement = this.mouvement[this.iteratorDeplacement + 1];
+       let nextMouvement = this.mouvements[0];
        var futurPosition = this.position;
         
         if(nextMouvement == Mouvement.A) {
@@ -35,7 +32,7 @@ export default class Aventurier {
     };
     
     ignoreNextDeplacement() {
-        this.iteratorDeplacement++;
+        this.mouvements.shift();
     };
     
     ramasserTresors(nb) {
@@ -44,7 +41,7 @@ export default class Aventurier {
     
     effectuerDeplacement() {
         // Recupérer le prochain mouvement à éffectuer
-        let nextMouvement = this.mouvement[this.iteratorDeplacement + 1];
+        let nextMouvement = this.mouvements.shift();
         var futurPosition = this.position;
         var isMvtAvancer = false;
         
@@ -55,7 +52,6 @@ export default class Aventurier {
         }  else {
             this.axe = this.axe.deplacer(nextMouvement, Mouvement);
         }
-        this.iteratorDeplacement++;
         return isMvtAvancer;
     };
     
