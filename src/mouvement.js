@@ -11,20 +11,12 @@ Mouvement.D = new Mouvement("D");
 Mouvement.G = new Mouvement("G");
 
 Mouvement.getMouvement = function (str) {
-    switch (str) {
-    case "A":
-        {
-            return Mouvement.A;
-        }
-    case "D":
-        {
-            return Mouvement.D;
-        }
-    case "G":
-        {
-            return Mouvement.G;
-        }
-    }; 
+    const Mouvements = {
+        'A': Mouvement.A,
+        'D': Mouvement.D,
+        'G': Mouvement.G
+    }
+    return Mouvements[str];
 };
 
 Mouvement.A.avancer = function (axe, position, injectAxe) {

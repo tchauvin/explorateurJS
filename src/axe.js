@@ -6,25 +6,14 @@ export default class Axe {
 }
 
 Axe.getAxe = function (str) {
-        switch (str) {
-        case "N":
-            {
-                return Axe.N;
-            }
-        case "S":
-            {
-                return Axe.S;
-            }
-        case "E":
-            {
-                return Axe.E;
-            }
-        case "O":
-            {
-                return Axe.O;
-            }
-        }; 
-    };
+    const axes = {
+        'N': Axe.N,
+        'S': Axe.S,
+        'E': Axe.E,
+        'O': Axe.O
+    }
+    return axes[str];
+};
 
 Axe.N = new Axe("N");
 Axe.O = new Axe("O");
