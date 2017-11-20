@@ -39,6 +39,14 @@ export default class Plateau {
         }
         return false;
     }
+    
+    ramasserTresor(aventurier) {
+        var positionTresor = this.positionContientUnTresor(aventurier.position);
+        if (positionTresor && positionTresor.nbTresor > 0) {
+            aventurier.ramasserTresors(1);
+            positionTresor.enleverTresor();
+        }
+    }
 
     async deplacerAventuriers() {
         let nbAventuriers = this.aventuriers.length;
@@ -54,22 +62,15 @@ export default class Plateau {
                 // Si la position est executable
                 if (this.positionSurPlateau(futurPosition) && !this.positionIsMontagne(futurPosition)) {
                     // SI la position n'est pas prise par un autre aventurier
-                    if (!this.positionEstPrise(futurPosition, currentAventurier.firstName)) {
-                        var isAvancer = currentAventurier.effectuerDeplacement();
-
-                        // Si on change de position alors on regarde si on peut rammaser un trésors.
-                        if (isAvancer) {
-                            var positionTresor = this.positionContientUnTresor(futurPosition);
-                            if (positionTresor && positionTresor.nbTresor > 0) {
-                                currentAventurier.ramasserTresors(1);
-                                positionTresor.enleverTresor();
-                            }
-                        }
+                    // && Si on change de position alors on regarde si on peut rammaser un trésors.
+                    if (!this.positionEstPrise(futurPosition, currentAventurier.firstName)
+                       && currentAventurier.effectuerDeplacement()) {
+                        this.ramasserTresor(currentAventurier);
                     }
                 } else {
                     currentAventurier.ignoreNextDeplacement();
                 }
-                //break;
+                
                 if (!currentAventurier.deplacementDisponible()) {
                     nbAventuriersFinish++;
                 }
